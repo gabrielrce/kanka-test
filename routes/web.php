@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-//1st part: Decide which view to load based on a/b rand var
+//1st part: Decide which view to load based on a/b rand variable
 //2nd part: Encode a/b var as an array and console.log output for demonstration purpose only
 //3rd part: Decide whether the web page is freshly loaded or refrshed
 
@@ -22,7 +22,9 @@ if ($pageRefreshed == 0) {
     Route::view('/', 'welcome' .  $_COOKIE["TestCookie"]);
 }
 
-$jsvar = json_encode(array("a/b var" => $_COOKIE["TestCookie"]));
-echo '<script>
-console.log(' . $jsvar . ');
-</script>';
+if (isset($_COOKIE['TestCookie'])) {
+    $jsvar = json_encode(array("a/b var" => $_COOKIE["TestCookie"]));
+    echo '<script>
+    console.log(' . $jsvar . ');
+    </script>';
+}
